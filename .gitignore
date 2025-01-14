@@ -1,0 +1,5 @@
+/Passwordless/src/main/resources/properties/config.properties
+/Passwordless/src/main/resources/application.properties.example
+**/.idea
+**/.vscode
+/CartoonBara-User/CartoonBara_Back/src/main/resources/application.properties

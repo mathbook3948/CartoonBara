@@ -1,0 +1,92 @@
+/* 전체 컨테이너 스타일 */
+.container2 {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left; /* 왼쪽 정렬로 유지 */
+}
+
+/* 설문 제목 스타일 */
+.container2 h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* 문항 수 스타일 */
+.container2 p {
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+/* 문항 라벨 스타일 */
+.container2 .form-label {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+/* 설문 항목 컨테이너 */
+.container2 .survey_mb-3 {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* 라디오 버튼 스타일 */
+.container2 input[type="radio"] {
+  margin-right: 10px;
+  cursor: pointer;
+  accent-color: #007bff; /* 브라우저 지원 시 라디오 버튼 색상 */
+}
+
+.container2 input[type="radio"]:hover {
+  transform: scale(1.1); /* 선택 전 약간 확대 효과 */
+}
+
+/* 버튼 스타일 */
+.container2 .btn-primary {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.container2 .btn-primary:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px); /* 약간 떠오르는 효과 */
+}
+
+/* 반응형 디자인 */
+@media screen and (max-width: 768px) {
+  .container2 {
+    padding: 15px;
+  }
+
+  .container2 h2 {
+    font-size: 1.5rem;
+  }
+
+  .container2 .btn-primary {
+    font-size: 1rem;
+  }
+}

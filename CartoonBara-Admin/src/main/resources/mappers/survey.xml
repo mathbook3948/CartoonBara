@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjangtrio.project1_back.project1_back.dao.SurveyDAO">
+  <select id="maxSurveyNum" resultType="Long">
+            SELECT MAX(num) FROM survey
+  </select>
+
+  <select id="findBySNUM" parameterType="Long" resultType="surveyresultvo">
+            SELECT 
+                s.num AS surveyNum,
+                s.sub AS surveySub,
+                s.code AS surveyCode,
+                s.sdate AS surveyDate,
+                sc.surveytype AS surveytype,
+                sc.subcode AS subCode,
+                sc.surveytitle AS surveytitle,
+                sc.surveycnt AS surveycnt
+            FROM survey s, surveycontent sc
+            WHERE s.num = sc.subcode AND s.num = #{num}
+  </select>
+
+  <insert id="saveSurvey" parameterType="surveyvo">
+            INSERT INTO survey (num, code, sdate, sub)
+            VALUES (survey_seq.NEXTVAL,  #{code, jdbcType=INTEGER}, sysdate, #{sub, jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="saveSurveyContent" parameterType="surveyContentvo">
+            INSERT INTO SURVEYCONTENT (subcode, surveycnt, surveytitle, surveytype) 
+            VALUES(survey_seq.CURRVAL,#{surveycnt},#{surveytitle},#{surveytype})
+  </insert>
+
+  <!-- <insert id="saveSurveyContent" parameterType="java.util.List">
+    <selectKey keyProperty="subcode" resultType="Long" order="BEFORE">
+            SELECT survey_seq.CURRVAL FROM survey
+    </selectKey>
+    <foreach collection="list" item="surveytitle" separator=" " open="insert all" close="select * from dual">
+            INSERT INTO SURVEYCONTENT(subcode, surveycnt, surveytitle, surveytype) 
+            VALUES(#{subcode},#{surveyCnt},#{surveyTitle},#{surveyType})
+    </foreach>
+  </insert> -->
+
+</mapper>

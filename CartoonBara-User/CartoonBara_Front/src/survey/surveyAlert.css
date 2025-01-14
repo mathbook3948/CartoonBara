@@ -1,0 +1,45 @@
+.surveyAlert-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.sureyAlery-div {
+  position: relative;
+  border-radius: 8px;
+  width: 400px;
+  height: 500px;
+  text-align: center;
+}
+
+.survey-alert-div {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sureyAlery-div-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.survey-alert-close {
+  padding: 15px;
+  background-color: #000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+
+}
+
+.survey-alert-close:hover {
+  background-color: blue;
+}

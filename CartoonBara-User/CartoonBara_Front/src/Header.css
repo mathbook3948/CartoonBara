@@ -1,0 +1,311 @@
+/* 전체 스타일 초기화 */
+.headercontroller {
+    margin: 0;
+    /* padding: 0; */
+}
+
+/* 헤더의 네비게이션 바 스타일 */
+.headercontroller-header {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 네비게이션 컨테이너 */
+.headercontroller-nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 웹툰 탐구생활 로고 스타일 */
+.headercontroller-logo {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.headercontroller-menu {
+    display: flex;
+    text-align: center;
+    gap: 2rem;
+    font-size: 2.5rem;
+    padding-right: 5rem;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    
+}
+
+.headercontroller-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.headercontroller-Link {
+    padding-right: 100px;
+}
+
+/* 네비게이션 메뉴 */
+.headercontroller-top-list {
+    list-style: none;
+    display: flex;
+    gap: 4vw;
+    padding: 0;
+    margin-bottom: 0.5rem !important;
+}
+
+.headercontroller-item {
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    
+}
+
+.headercontroller-item a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    
+}
+
+.headercontroller-item a:hover {
+    color: #0056b3;
+}
+
+/* 로그인/회원가입 영역 */
+.headercontroller-bottom {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin-left: 12rem;
+    margin-right: 1rem;
+
+}
+
+/* 검색창 스타일 */
+.headercontroller-search {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-left: -20px;
+
+}
+
+.headercontroller-search-bar {
+    padding: 0.5rem 1rem;
+    border: 2px solid #333;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    width: 30rem;
+    height: 100%;
+
+}
+
+.headercontroller-btn-dark {
+    background-color: #333;
+    color: #fff;
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    width: 77px;
+    align-items: center;
+    margin: 0;
+    text-align: center;
+}
+
+.headercontroller-auth-links {
+    padding-left: 50px;
+}
+
+.headercontroller-btn-click {
+    background-color: #333;
+    color: #fff;
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    width: 100px;
+    align-items: center;
+    text-align: center;
+    font-size: 0.97rem;
+}
+
+.headercontroller-btn-dark:hover {
+    background-color: white;
+    color: black;
+}
+
+/* 로그인/회원가입 버튼 영역 */
+.headercontroller-user-info,
+.headercontroller-auth-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+   
+}
+
+/* 로그인, 회원가입 버튼 스타일 */
+.headercontroller-login-item {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+
+/* 더 작은 화면에서 폰트 크기 조정 */
+.headercontroller-user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    margin: 5px;
+    width: auto;
+    height: auto;
+    font-size: 1.1rem;
+    box-sizing: border-box;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.headercontroller-user-info * {
+    margin: 5px;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.headercontroller-login-item {
+    font-size: 1rem;
+    margin-right: 10px;
+}
+
+.headercontroller-user-btn {
+    font-size: 1rem;
+    padding: 8px 16px;
+    white-space: nowrap;
+}
+#headercontroller-title {
+    display: flex;
+    align-items: center;
+}
+#headercontroller-title-text {
+    font-size: 2rem;
+}
+
+/* 반응형  */
+
+@media screen and (min-width : 768px) and (max-width : 1024px) {
+    .headercontroller-bottom {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+        margin-left: 2rem;
+    }
+    .headercontroller-auth-links {
+        padding-left: 50px;
+    }
+
+}
+@media screen and (min-width : 480px)  and (max-width : 767px) {
+    .headercontroller-bottom {
+        display: flex;
+        gap: 0rem;
+        justify-content: center;
+        align-items: center;
+        margin-left: 1vw;
+    }
+    .headercontroller-auth-links {
+        padding-left: 10px;
+    }
+    .headercontroller-top-list {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        flex-wrap: nowrap;
+        padding: 1rem;
+        gap: 2vw;
+        width: 100%;
+        
+        margin-bottom: 0.5rem !important
+    }
+    .headercontroller-top {
+        width: 100%;
+    }
+    .headercontroller-btn-click:nth-child(2) {
+        position: absolute;
+        opacity: 0;
+    }
+    .headercontroller-menu {
+        padding-left: 1vw;
+        gap: 4vw;
+    }
+    .headercontroller-btn-click {
+        width: fit-content;
+        padding: 4px  12px 4px 12px;
+    }
+}
+@media screen and (max-width : 479px) {
+    .headercontroller-bottom {
+        display: flex;
+        gap: 0rem;
+        justify-content: center;
+        align-items: center;
+        margin-left: 1vw;
+    }
+    .headercontroller-auth-links {
+        padding-left: 10px;
+    }
+    .headercontroller-top-list {
+        list-style: none;
+        display: flex;
+        flex-wrap: nowrap;
+        padding: 2vw;
+        gap: 5vw;
+        width: 100%;
+        margin-bottom: 0rem !important
+    }
+    .headercontroller-top-list a {
+        font-size: 3.5vw;
+    }
+    .headercontroller-top {
+        width: 100%;
+        margin-top: 0;
+
+    }
+    .headercontroller-btn-click:nth-child(2) {
+        position: absolute;
+        opacity: 0;
+    }
+    .headercontroller-menu {
+        padding-left: 1vw;
+        gap: 4vw;
+    }
+    .headercontroller-btn-click {
+        width: fit-content;
+        padding: 3px 8px 3px 8px;
+    }
+
+    #headercontroller-title-text {
+        font-size: 5vw !important;
+    }
+    .headercontroller-logo-img-main{
+        width: 12vw !important;
+        height: auto;
+        object-fit: contain;
+    }
+}

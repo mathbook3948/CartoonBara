@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjangtrio.project1_back.project1_back.dao.Managing_ReviewsDAO">
+
+    <!-- 누적 글/댓글 작성수 -->
+    <select id="getTotalCounts" resultType="com.jjangtrio.project1_back.project1_back.vo.Managing_ReviewsVO">
+        SELECT 
+            (SELECT COUNT(*) FROM COMMUNITY) +
+            (SELECT COUNT(*) FROM WEBTOON_REVIEW) AS totalPostCount,
+            (SELECT COUNT(*) FROM COMMUNITY_COMM) +
+            (SELECT COUNT(*) FROM WEBTOON_REVIEW_COMM) AS totalCommentCount,
+            (SELECT COUNT(*) FROM WEBTOON_REVIEW) AS webtoonReviewCount,
+            (SELECT COUNT(*) FROM COMMUNITY) AS communityPostCount,
+            (SELECT COUNT(*) FROM WEBTOON_REVIEW_COMM) AS webtoonReviewCommentCount,
+            (SELECT COUNT(*) FROM COMMUNITY_COMM) AS communityCommentCount
+        FROM DUAL
+    </select>
+
+    <!-- 일간 데이터 -->
+    <select id="getDailyCounts" resultType="com.jjangtrio.project1_back.project1_back.vo.Managing_ReviewsVO">
+        SELECT 
+            (SELECT COUNT(*) FROM COMMUNITY WHERE TRUNC(COMMUNITY_DATE) = TRUNC(SYSDATE)) +
+            (SELECT COUNT(*) FROM WEBTOON_REVIEW WHERE TRUNC(WEBTOON_REVIEW_DATE) = TRUNC(SYSDATE)) AS totalPostCount,
+            (SELECT COUNT(*) FROM COMMUNITY_COMM WHERE TRUNC(COMMUNITY_COMM_DATE) = TRUNC(SYSDATE)) +
+            (SELECT COUNT(*) FROM WEBTOON_REVIEW_COMM WHERE TRUNC(WEBTOON_REVIEW_COMM_DATE) = TRUNC(SYSDATE)) AS totalCommentCount,
+            (SELECT COUNT(*) FROM WEBTOON_REVIEW WHERE TRUNC(WEBTOON_REVIEW_DATE) = TRUNC(SYSDATE)) AS webtoonReviewCount,
+            (SELECT COUNT(*) FROM COMMUNITY WHERE TRUNC(COMMUNITY_DATE) = TRUNC(SYSDATE)) AS communityPostCount,
+            (SELECT COUNT(*) FROM WEBTOON_REVIEW_COMM WHERE TRUNC(WEBTOON_REVIEW_COMM_DATE) = TRUNC(SYSDATE)) AS webtoonReviewCommentCount,
+            (SELECT COUNT(*) FROM COMMUNITY_COMM WHERE TRUNC(COMMUNITY_COMM_DATE) = TRUNC(SYSDATE)) AS communityCommentCount
+        FROM DUAL
+    </select>
+
+    <!-- 주간 데이터 -->
+    <select id="getWeeklyCounts" resultType="com.jjangtrio.project1_back.project1_back.vo.Managing_ReviewsVO">
+        SELECT 
+            (SELECT COUNT(*) FROM COMMUNITY WHERE TRUNC(COMMUNITY_DATE) BETWEEN TRUNC(SYSDATE, 'IW') AND TRUNC(SYSDATE)) +
+            (SELECT COUNT(*) FROM WEBTOON_REVIEW WHERE TRUNC(WEBTOON_REVIEW_DATE) BETWEEN TRUNC(SYSDATE, 'IW') AND TRUNC(SYSDATE)) AS totalPostCount,
+            (SELECT COUNT(*) FROM COMMUNITY_COMM WHERE TRUNC(COMMUNITY_COMM_DATE) BETWEEN TRUNC(SYSDATE, 'IW') AND TRUNC(SYSDATE)) +
+            (SELECT COUNT(*) FROM WEBTOON_REVIEW_COMM WHERE TRUNC(WEBTOON_REVIEW_COMM_DATE) BETWEEN TRUNC(SYSDATE, 'IW') AND TRUNC(SYSDATE)) AS totalCommentCount,
+            (SELECT COUNT(*) FROM WEBTOON_REVIEW WHERE TRUNC(WEBTOON_REVIEW_DATE) BETWEEN TRUNC(SYSDATE, 'IW') AND TRUNC(SYSDATE)) AS webtoonReviewCount,
+            (SELECT COUNT(*) FROM COMMUNITY WHERE TRUNC(COMMUNITY_DATE) BETWEEN TRUNC(SYSDATE, 'IW') AND TRUNC(SYSDATE)) AS communityPostCount,
+            (SELECT COUNT(*) FROM WEBTOON_REVIEW_COMM WHERE TRUNC(WEBTOON_REVIEW_COMM_DATE) BETWEEN TRUNC(SYSDATE, 'IW') AND TRUNC(SYSDATE)) AS webtoonReviewCommentCount,
+            (SELECT COUNT(*) FROM COMMUNITY_COMM WHERE TRUNC(COMMUNITY_COMM_DATE) BETWEEN TRUNC(SYSDATE, 'IW') AND TRUNC(SYSDATE)) AS communityCommentCount
+        FROM DUAL
+    </select>
+
+    <!-- 월간 데이터 -->
+    <select id="getMonthlyCounts" resultType="com.jjangtrio.project1_back.project1_back.vo.Managing_ReviewsVO">
+        SELECT 
+            (SELECT COUNT(*) FROM COMMUNITY WHERE TRUNC(COMMUNITY_DATE) BETWEEN TRUNC(SYSDATE, 'MM') AND TRUNC(SYSDATE)) +
+            (SELECT COUNT(*) FROM WEBTOON_REVIEW WHERE TRUNC(WEBTOON_REVIEW_DATE) BETWEEN TRUNC(SYSDATE, 'MM') AND TRUNC(SYSDATE)) AS totalPostCount,
+            (SELECT COUNT(*) FROM COMMUNITY_COMM WHERE TRUNC(COMMUNITY_COMM_DATE) BETWEEN TRUNC(SYSDATE, 'MM') AND TRUNC(SYSDATE)) +
+            (SELECT COUNT(*) FROM WEBTOON_REVIEW_COMM WHERE TRUNC(WEBTOON_REVIEW_COMM_DATE) BETWEEN TRUNC(SYSDATE, 'MM') AND TRUNC(SYSDATE)) AS totalCommentCount,
+            (SELECT COUNT(*) FROM WEBTOON_REVIEW WHERE TRUNC(WEBTOON_REVIEW_DATE) BETWEEN TRUNC(SYSDATE, 'MM') AND TRUNC(SYSDATE)) AS webtoonReviewCount,
+            (SELECT COUNT(*) FROM COMMUNITY WHERE TRUNC(COMMUNITY_DATE) BETWEEN TRUNC(SYSDATE, 'MM') AND TRUNC(SYSDATE)) AS communityPostCount,
+            (SELECT COUNT(*) FROM WEBTOON_REVIEW_COMM WHERE TRUNC(WEBTOON_REVIEW_COMM_DATE) BETWEEN TRUNC(SYSDATE, 'MM') AND TRUNC(SYSDATE)) AS webtoonReviewCommentCount,
+            (SELECT COUNT(*) FROM COMMUNITY_COMM WHERE TRUNC(COMMUNITY_COMM_DATE) BETWEEN TRUNC(SYSDATE, 'MM') AND TRUNC(SYSDATE)) AS communityCommentCount
+        FROM DUAL
+    </select>
+
+</mapper>

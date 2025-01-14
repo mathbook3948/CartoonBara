@@ -1,0 +1,7 @@
+passwordless.corpId = YOUR_CORP_ID
+passwordless.serverId = YOUR_SERVER_ID
+passwordless.serverKey = YOUR_SERVER_KEY
+passwordless.simpleAutopasswordUrl = https://<YOUR_PASSWORDLESS_X1280_DOMAIN>:8080
+passwordless.restCheckUrl = http://<YOUR_PASSWORDLESS_X1280_DOMAIN>:11040
+passwordless.pushConnectorUrl = ws:<YOUR_PASSWORDLESS_X1280_DOMAIN>:15010
+passwordless.recommend = 1

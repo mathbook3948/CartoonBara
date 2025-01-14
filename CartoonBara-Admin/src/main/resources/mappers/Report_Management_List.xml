@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjangtrio.project1_back.project1_back.dao.Report_Management_ListDAO">
+
+   <select id="getWReportList" parameterType="Long" resultType="com.jjangtrio.project1_back.project1_back.vo.Report_Management_List">
+        SELECT 
+            s.PRIMARYNUMBER as num,
+            w.WEBTOON_REVIEW_REVIEW AS title,      
+            COUNT(s.SINGO_CATEGORY) AS singoCount,             
+            MAX(s.SINGO_DATE) AS singoDate,                    
+            s.SINGO_CURRENT_URL AS siteUrl           
+        FROM WEBTOON_REVIEW w
+        LEFT JOIN SINGO s ON w.WEBTOON_REVIEW_NUM = s.PRIMARYNUMBER
+        WHERE w.USER_NUM = #{userNum}                     
+            AND s.SINGO_CATEGORY = 1   
+            AND w.WEBTOON_REVIEW_singo_flag = 1       
+        GROUP BY w.WEBTOON_REVIEW_REVIEW, s.SINGO_CURRENT_URL, s.PRIMARYNUMBER  
+</select>
+
+ <select id="getWCReportList" parameterType="Long" resultType="com.jjangtrio.project1_back.project1_back.vo.Report_Management_List">
+        SELECT 
+            s.PRIMARYNUMBER as num,
+            wc.WEBTOON_REVIEW_COMM_CONTENT AS title,      
+            COUNT(s.SINGO_CATEGORY) AS singoCount,             
+            MAX(s.SINGO_DATE) AS singoDate,                    
+            s.SINGO_CURRENT_URL AS siteUrl           
+        FROM WEBTOON_REVIEW_COMM wc
+        LEFT JOIN SINGO s ON wc.WEBTOON_REVIEW_COMM_NUM = s.PRIMARYNUMBER
+        WHERE wc.USER_NUM = #{userNum}                     
+            AND s.SINGO_CATEGORY = 2  
+            AND wc.WEBTOON_REVIEW_COMM_singo_flag = 1        
+        GROUP BY wc.WEBTOON_REVIEW_COMM_CONTENT, s.SINGO_CURRENT_URL, s.PRIMARYNUMBER
+</select>
+
+ <select id="getCReportList" parameterType="Long" resultType="com.jjangtrio.project1_back.project1_back.vo.Report_Management_List">
+        SELECT 
+            s.PRIMARYNUMBER as num,
+            c.COMMUNITY_TITLE AS title,      
+            COUNT(s.SINGO_CATEGORY) AS singoCount,             
+            MAX(s.SINGO_DATE) AS singoDate,                    
+            s.SINGO_CURRENT_URL AS siteUrl           
+        FROM COMMUNITY c
+        LEFT JOIN SINGO s ON c.COMMUNITY_NUM = s.PRIMARYNUMBER
+        WHERE c.USER_NUM = #{userNum}                     
+            AND s.SINGO_CATEGORY = 3       
+            AND c.COMMUNITY_singo_flag = 1        
+        GROUP BY c.COMMUNITY_TITLE, s.SINGO_CURRENT_URL, s.PRIMARYNUMBER  
+</select>
+
+ <select id="getCCReportList" parameterType="Long" resultType="com.jjangtrio.project1_back.project1_back.vo.Report_Management_List">
+        SELECT 
+            s.PRIMARYNUMBER as num,
+            cc.COMMUNITY_COMM_CONTENT AS title,      
+            COUNT(s.SINGO_CATEGORY) AS singoCount,             
+            MAX(s.SINGO_DATE) AS singoDate,                    
+            s.SINGO_CURRENT_URL AS siteUrl           
+        FROM COMMUNITY_COMM cc
+        LEFT JOIN SINGO s ON cc.COMMUNITY_COMM_NUM = s.PRIMARYNUMBER
+        WHERE cc.USER_NUM = #{userNum}                     
+            AND s.SINGO_CATEGORY = 4   
+            AND cc.COMMUNITY_COMM_singo_flag = 1       
+        GROUP BY cc.COMMUNITY_COMM_CONTENT, s.SINGO_CURRENT_URL, s.PRIMARYNUMBER
+</select>
+
+        <update id="updateSingoFlag" parameterType="map">
+    <choose>
+        <when test="singoCategory == 1">
+            UPDATE WEBTOON_REVIEW
+            SET WEBTOON_REVIEW_SINGO_FLAG = 0
+            WHERE WEBTOON_REVIEW_NUM = #{primarynumber}
+        </when>
+        <when test="singoCategory == 2">
+            UPDATE WEBTOON_REVIEW_COMM
+            SET WEBTOON_REVIEW_COMM_SINGO_FLAG = 0
+            WHERE WEBTOON_REVIEW_COMM_NUM = #{primarynumber}
+        </when>
+        <when test="singoCategory == 3">
+            UPDATE COMMUNITY
+            SET COMMUNITY_SINGO_FLAG = 0
+            WHERE COMMUNITY_NUM = #{primarynumber}
+        </when>
+        <when test="singoCategory == 4">
+            UPDATE COMMUNITY_COMM
+            SET COMMUNITY_COMM_SINGO_FLAG = 0
+            WHERE COMMUNITY_COMM_NUM = #{primarynumber}
+        </when>
+        <otherwise>
+            SELECT 0
+        </otherwise>
+    </choose>
+</update>
+</mapper>

@@ -1,0 +1,40 @@
+
+  .survey-result {
+    margin-top: 20px;
+  }
+  
+  .survey-result-item {
+    margin-bottom: 20px;
+  }
+  
+  .survey-result-label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .survey-progress-bar {
+    width: 100%;
+    height: 24px;
+    background-color: #f0f0f0;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  .survey-progress-fill {
+    height: 100%;
+    background-color: gray;
+    transition: width 0.5s ease-in-out;
+  }
+  
+  .survey-percentage {
+    margin-top: 5px;
+    text-align: right;
+    font-weight: bold;
+  }
+  
+  .survey-total-votes {
+    margin-top: 20px;
+    text-align: right;
+    font-weight: bold;
+    color: #666;
+  }

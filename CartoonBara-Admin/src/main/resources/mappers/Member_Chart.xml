@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjangtrio.project1_back.project1_back.dao.Member_ChartDAO">
+
+    <!-- 연령대와 성별별 비율을 조회하는 SQL -->
+    <select id="getAgeGenderStatistics" resultType="com.jjangtrio.project1_back.project1_back.vo.Member_ChartVO">
+             SELECT
+            (SELECT COUNT(USER_NUM) FROM "user") AS totalUsers, -- 총 사용자 수
+            (SELECT COUNT(USER_NUM)
+             FROM "user"
+             WHERE TRUNC(USER_DATE) = TRUNC(SYSDATE)) AS todaysSignups, -- 오늘 가입 사용자 수
+            
+            CASE
+                WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM USER_BIRTH) BETWEEN 1 AND 15 THEN '1-15'
+                WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM USER_BIRTH) BETWEEN 16 AND 29 THEN '16-29'
+                WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM USER_BIRTH) BETWEEN 30 AND 39 THEN '30-39'
+                WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM USER_BIRTH) BETWEEN 40 AND 49 THEN '40-49'
+                WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM USER_BIRTH) BETWEEN 50 AND 59 THEN '50-59'
+                ELSE '60+'
+            END AS ageGroup,
+            USER_GENDER AS userGender, -- 성별
+            ROUND(COUNT(*) * 100 / (SELECT COUNT(*) FROM "user"), 1) AS percentage -- 비율
+        FROM "user"
+        WHERE USER_BIRTH IS NOT NULL 
+        GROUP BY
+            CASE
+                WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM USER_BIRTH) BETWEEN 1 AND 15 THEN '1-15'
+                WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM USER_BIRTH) BETWEEN 16 AND 29 THEN '16-29'
+                WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM USER_BIRTH) BETWEEN 30 AND 39 THEN '30-39'
+                WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM USER_BIRTH) BETWEEN 40 AND 49 THEN '40-49'
+                WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM USER_BIRTH) BETWEEN 50 AND 59 THEN '50-59'
+                ELSE '60+'
+            END,
+            USER_GENDER
+    </select>
+
+</mapper>

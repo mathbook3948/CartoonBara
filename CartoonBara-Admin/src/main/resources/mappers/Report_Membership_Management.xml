@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjangtrio.project1_back.project1_back.dao.Report_Membership_ManagementDAO">
+
+    <!-- 신고 회원 목록 조회 쿼리 -->
+   <select id="report_Membership_ManagementList" parameterType="map" resultType="reportMembershipManagementVO">
+    SELECT *
+FROM (
+    SELECT 
+        u.USER_NUM AS userNum, 
+        u.USER_NICKNAME AS nickname, 
+        u.USER_NAME AS name,    
+        u.USER_SINGO_ACCUMULATED AS singoAccumulated, 
+        COALESCE((SELECT COUNT(*) 
+                  FROM COMMUNITY c 
+                  WHERE c.USER_NUM = u.USER_NUM AND c.COMMUNITY_SINGO_FLAG = 1), 0) AS communityPostCount,
+        COALESCE((SELECT COUNT(*) 
+                  FROM COMMUNITY_COMM cc 
+                  WHERE cc.USER_NUM = u.USER_NUM AND cc.COMMUNITY_COMM_SINGO_FLAG = 1), 0) AS communityCommentCount,
+        COALESCE((SELECT COUNT(*) 
+                  FROM WEBTOON_REVIEW wr 
+                  WHERE wr.USER_NUM = u.USER_NUM AND wr.WEBTOON_REVIEW_SINGO_FLAG = 1), 0) AS reviewPostCount,
+        COALESCE((SELECT COUNT(*) 
+                  FROM WEBTOON_REVIEW_COMM wrc 
+                  WHERE wrc.USER_NUM = u.USER_NUM AND wrc.WEBTOON_REVIEW_COMM_SINGO_FLAG = 1), 0) AS reviewCommentCount,
+        ROW_NUMBER() OVER (ORDER BY u.USER_NUM) AS rn
+            FROM 
+                "user" u
+            LEFT JOIN 
+                "permission" p ON u.USER_NUM = p.USER_NUM
+            WHERE 
+                p.PERMISSION_STATE = 3
+        <if test="category != null and category == 'nickname' and keyword != null and keyword != ''">
+            AND u.USER_NICKNAME LIKE '%' || #{keyword} || '%'
+        </if>
+        <if test="category != null and category == 'name' and keyword != null and keyword != ''">
+            AND u.USER_NAME LIKE '%' || #{keyword} || '%'
+        </if>
+    ) sub
+    WHERE sub.rn BETWEEN #{offset} + 1 AND #{offset} + #{limit}
+        </select>
+
+
+
+
+    <!-- 전체 데이터 개수 조회 쿼리 -->
+    <select id="totalCount" parameterType="map" resultType="int">
+           SELECT COUNT(*)
+    FROM "user" u
+    LEFT JOIN "permission" p ON u.USER_NUM = p.USER_NUM
+    WHERE p.PERMISSION_STATE = 3
+    <if test="category != null and category == 'nickname' and keyword != null and keyword != ''">
+        AND u.USER_NICKNAME LIKE '%' || #{keyword} || '%'
+    </if>
+    <if test="category != null and category == 'name' and keyword != null and keyword != ''">
+        AND u.USER_NAME LIKE '%' || #{keyword} || '%'
+    </if>
+    </select>
+
+  <!-- 활동 정지 및 탈퇴 -->
+<update id="updateUserStatus" parameterType="map">
+    UPDATE "permission"
+    SET PERMISSION_STATE = #{permissionState}
+    WHERE USER_NUM = #{userNum} 
+      AND PERMISSION_STATE = 3
+</update>
+
+<!-- 신고 처리 (신고 철회) -->
+<update id="revokeReport" parameterType="int">
+    UPDATE "permission"
+    SET PERMISSION_STATE = 1
+    WHERE USER_NUM = #{userNum} 
+      AND PERMISSION_STATE = 3
+</update>
+
+</mapper>

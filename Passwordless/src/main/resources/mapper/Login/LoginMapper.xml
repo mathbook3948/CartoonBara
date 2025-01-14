@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pwl.mapper.Login.LoginMapper">
+
+	<!-- 로그인 체크 -->
+	<select id="checkPassword" parameterType="UserInfo"
+		resultType="UserInfo">
+		SELECT user_id id, user_pwd pw, user_email email, user_date
+		regdate
+		FROM "user"
+		WHERE user_id = '${id}' AND user_pwd = '${pw}'
+	</select>
+
+	<!-- 회원정보 검색 -->
+
+	<select id="getUserById" parameterType="UserInfo"
+		resultType="UserInfo">
+		SELECT user_id id, user_pwd pw, user_email email, user_date
+		regdate
+		FROM "user"
+		WHERE user_id = #{id}
+	</select>
+
+	<!-- 패스워드 업데이트 -->
+	<update id="updatePassword">
+		UPDATE "user"
+		SET user_pwd='${pw}'
+		WHERE user_id =
+		'${id}'
+	</update>
+
+	<update id="updatePermission" parameterType="map">
+		UPDATE "permission"
+		SET is_password_less = #{permissionNum}
+		WHERE user_num = (
+		SELECT user_num
+		FROM "user"
+		WHERE user_id = #{userId}
+		)
+	</update>
+
+	<!-- 비밀번호 변경 -->
+	<update id="changepw">
+		UPDATE "user"
+		SET user_pwd = '${pw}'
+		WHERE user_id ='${id}'
+	</update>
+	<select id="getPermission" parameterType="UserInfo" resultType="int">
+		SELECT IS_PASSWORD_LESS FROM "permission" where user_num = (
+		SELECT user_num
+		FROM "user"
+		WHERE user_id = #{id}
+		)
+	</select>
+	
+	<select id="getUserDetail" parameterType="UserInfo" resultType="map">
+		SELECT u.user_num as userNum, p.permission_master as permissionMaster, p.permission_state as permissionState FROM "user" u, "permission" p WHERE u.user_num = p.user_num AND u.user_id = #{id}
+	</select>
+
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjangtrio.project1_back.project1_back.dao.QnaDAO">
+    <select id="qnaAnswer" parameterType="qnavo">
+	    UPDATE QNA 
+        SET QNA_ANSWER = #{qnaAnswer},
+            QNA_ANSWER_DATE = SYSDATE
+        WHERE QNA_NUM = #{qnaNum}
+    </select>
+
+    <select id="qnaDetail" parameterType="Long" resultType="qnavo">
+	    SELECT 
+            QNA_NUM as qnaNum,
+            USER_NUM as userNum,
+            PERMISSION_NUM as permissionNum,
+            QNA_CATEGORY as qnaCategory,
+            QNA_TITLE as qnaTitle,
+            QNA_CONTENT as qnaContent,
+            QNA_QUESTION_DATE as qnaQuestionDate
+        FROM QNA WHERE QNA_NUM = #{qnaNum}
+    </select>
+
+</mapper>

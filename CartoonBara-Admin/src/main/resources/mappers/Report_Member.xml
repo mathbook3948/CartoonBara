@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjangtrio.project1_back.project1_back.dao.Report_MemberDAO">
+
+    <!-- 활동 정지: 특정 사용자의 permission_state를 5 (활동 정지)로 변경 -->
+    <update id="suspendUser">
+        UPDATE "permission"
+        SET PERMISSION_STATE = 5
+        WHERE USER_NUM = #{userNum} AND PERMISSION_STATE = 1
+    </update>
+
+    <!-- 활동 재개: 특정 사용자의 permission_state를 1 (사용자)로 변경 -->
+    <update id="resumeUser">
+        UPDATE "permission"
+        SET PERMISSION_STATE = 1
+        WHERE USER_NUM = #{userNum} AND PERMISSION_STATE = 5
+    </update>
+
+    <!-- 탈퇴시키기: permission_state를 무조건 5 (탈퇴)로 변경 -->
+    <update id="withdrawUser">
+        UPDATE "permission"
+        SET PERMISSION_STATE = 4
+        WHERE USER_NUM = #{userNum}
+    </update>
+
+    <!-- 탈퇴 취소: 특정 사용자의 permission_state를 1 (사용자)로 복원 -->
+    <update id="restoreUser">
+        UPDATE "permission"
+        SET PERMISSION_STATE = 1
+        WHERE USER_NUM = #{userNum} AND PERMISSION_STATE = 4
+    </update>
+
+    <!-- 가입 승인: 특정 사용자의 permission_state를 2 (가입 대기)에서 1 (사용자)로 변경 -->
+    <update id="approveUser">
+        UPDATE "permission"
+        SET PERMISSION_STATE = 1
+        WHERE USER_NUM = #{userNum} AND PERMISSION_STATE = 2
+    </update>
+
+</mapper>

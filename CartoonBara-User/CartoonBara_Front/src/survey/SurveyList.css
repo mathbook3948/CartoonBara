@@ -1,0 +1,79 @@
+/* 전체 컨테이너 */
+.container2 {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* 버튼 스타일 */
+  .survey-button {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .survey-button:hover {
+    background-color: white;
+  }
+  
+  /* 테이블 중앙 정렬 */
+  .survey-table {
+    margin: 20px auto;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 1000px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+  
+  /* 테이블 헤더 */
+  .survey-table th {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-weight: bold;
+  }
+  
+  /* 테이블 본문 */
+  .survey-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+  
+  /* 테이블 내부 테이블 */
+  .survey-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .survey-table table th,
+  .survey-table table td {
+    border: 1px solid #bbb;
+    padding: 8px;
+  }
+  
+  .survey-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .survey-table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* 반응형 디자인 */
+  @media screen and (max-width: 768px) {
+    .survey-table {
+      font-size: 14px;
+    }
+    .survey-button {
+      width: 100%;
+      font-size: 14px;
+    }
+  }

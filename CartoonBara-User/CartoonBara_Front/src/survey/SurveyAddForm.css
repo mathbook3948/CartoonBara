@@ -1,0 +1,104 @@
+/* 컨테이너 스타일 */
+.survey-container {
+  max-width: 600px;
+  /* 더 넓게 조정 */
+  margin: 50px auto;
+  /* 화면 가운데 정렬 */
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+/* 폼 스타일 */
+.survey-form {
+  width: 100%;
+}
+
+/* 테이블 스타일 */
+.survey-form-table {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+.survey-table-header {
+  background-color: #ece7e4;
+  padding: 12px;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+/* 테이블 헤더와 셀 */
+.survey-table-th,
+.survey-table-td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.survey-table-tr:hover {
+  background-color: #f2f2f2;
+}
+
+/* 입력 필드 스타일 */
+.input-field {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  transition: border-color 0.3s;
+}
+
+.input-field:focus {
+  border-color: blueviolet;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* 푸터 스타일 */
+.survey-table-footer {
+  text-align: center;
+  padding-top: 15px;
+}
+
+/* 버튼 스타일 */
+.survey-action-button {
+  font-size: 1rem;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.survey-action-button:hover {
+  background-color: #45a049;
+}
+
+/* 반응형 스타일 */
+@media screen and (max-width: 768px) {
+  .survey-container {
+    padding: 15px;
+  }
+
+  .survey-form-table {
+    font-size: 0.8rem;
+  }
+
+  .survey-action-button {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+}

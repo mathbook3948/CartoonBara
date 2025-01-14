@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>KakaoLogin</title>
+</head>
+
+<body>
+    <!-- 카카오 로그인 버튼 추가 -->
+    <button id="kakao-login-btn"><img src="kakao_login_medium_narrow.png" alt="카카오 로그인">카카오 로그인</button>
+
+    <!-- 카카오 로그아웃 버튼 추가 (초기에는 숨겨짐) -->
+    <button id="kakao-logout-btn" style="display: none;">카카오 로그아웃</button>
+
+    <!-- 사용자 정보 표시 영역 -->
+    <div id="user-info"></div>
+
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+        // 페이지가 로드된 후에 초기화
+        window.onload = function () {
+            // 카카오 SDK 초기화 (JavaScript 키)
+            Kakao.init('89a3786230bcc8515d1bd15947a2a106'); // 여기에 카카오 앱의 JavaScript 키 입력
+
+            // 카카오 로그인 함수 정의
+            function loginWithKakao() {
+                Kakao.Auth.login({
+                    scope: 'profile_nickname,profile_image,account_email', // 요청할 권한
+                    success: function (authObj) {
+                        console.log(authObj); // 로그인 성공 후, 인증 정보 출력
+                        // 카카오 사용자 정보 요청
+                        Kakao.API.request({
+                            url: '/v2/user/me',
+                            success: function (res) {
+                                console.log(res); // 사용자 정보 출력
+                                // 필요한 정보 예시
+                                const kakao_account = res.kakao_account;
+                                const nickname = kakao_account.profile.nickname;
+                                const email = kakao_account.email;
+
+                                console.log('Nickname:', nickname);
+                                console.log('Email:', email);
+
+                                // 로그인 후 UI 변경 예시
+                                document.getElementById('kakao-login-btn').style.display = 'none';
+                                document.getElementById('kakao-logout-btn').style.display = 'block';
+                                document.getElementById('user-info').innerText = `닉네임: ${nickname}, 이메일: ${email}`;
+
+                                // 로그인 후 토큰 로컬 스토리지에 저장
+                                localStorage.setItem('kakao_access_token', authObj.access_token);
+                            },
+                            fail: function (error) {
+                                console.error(error); // 실패 시 에러 출력
+                            }
+                        });
+                    },
+                    fail: function (error) {
+                        console.error(error); // 로그인 실패 시 에러 출력
+                    }
+                });
+            }
+
+            // 카카오 로그아웃 함수 정의
+            function logoutWithKakao() {
+                Kakao.Auth.logout(function () {
+                    console.log('로그아웃 성공');
+
+                    // 로컬 스토리지에서 카카오 액세스 토큰 삭제
+                    localStorage.removeItem('kakao_access_token');  // 토큰 삭제
+
+                    // 로그아웃 후 UI 변경 예시
+                    document.getElementById('kakao-login-btn').style.display = 'block';
+                    document.getElementById('kakao-logout-btn').style.display = 'none';
+                    document.getElementById('user-info').innerText = ''; // 사용자 정보 초기화
+
+                    // 새로고침 후, 토큰이 초기화 되었는지 확인
+                    location.reload();
+                });
+            }
+
+            // 로그인 버튼에 이벤트 바인딩
+            document.getElementById('kakao-login-btn').onclick = loginWithKakao;
+            // 로그아웃 버튼에 이벤트 바인딩
+            document.getElementById('kakao-logout-btn').onclick = logoutWithKakao;
+        };
+    </script>
+</body>
+
+</html>

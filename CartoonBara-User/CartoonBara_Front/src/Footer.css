@@ -1,0 +1,72 @@
+/* 전체 footer 영역의 스타일 */
+.footercontroller {
+    background-color: #ededed;
+    /* 밝은 배경색 */
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.footercontroller-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* footer에 있는 ul 목록 스타일 */
+.footercontroller-div-ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    gap: 3rem;
+}
+
+.footercontroller-div-ul .footercontroller-li-item {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.footercontroller-div-ul .footercontroller-li-item a {
+    text-decoration: none;
+    color: #50555b;
+    transition: color 0.3s ease;
+}
+
+.footercontroller-div-ul .footercontroller-li-item a:hover {
+    color: #1059a7;
+}
+
+/* footer 하단 copyright 영역 스타일 */
+.footercontroller-div-copy {
+    font-size: 0.9rem;
+    color: #555;
+    padding-top: 0.3rem;
+    border-top: 1px solid #ccc;
+    /* margin-top: 1rem; */
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .footercontroller-div-ul {
+        flex-direction: column;
+        /* 작은 화면에서는 항목이 세로로 정렬 */
+        gap: 1rem;
+    }
+
+    .footercontroller-div-copy {
+        font-size: 1.8rem;
+        /* 작은 화면에서 글자 크기 축소 */
+    }
+}
+.container {
+    min-height: 95vh;
+    margin: 0 auto;
+    padding: 0 16px;
+    font-family: 'Roboto', sans-serif;
+}
