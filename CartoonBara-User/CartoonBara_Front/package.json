@@ -12,10 +12,10 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@types/recharts": "^1.8.29",
+    "DatePicker": "^2.0.0",
     "axios": "^1.7.7",
     "chart.js": "^4.4.6",
     "chartjs-2": "^0.0.1-security",
-    "DatePicker": "^2.0.0",
     "es-hangul": "^2.2.3",
     "jsonwebtoken": "^9.0.2",
     "qs": "^6.13.1",
@@ -38,7 +38,9 @@
     "start": "set PORT=3009 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint:css": "stylelint \"src/**/*.css\" --fix",
+    "find:duplicates": "stylelint \"src/**/*.css\" --formatter verbose"
   },
   "eslintConfig": {
     "extends": [
@@ -62,6 +64,10 @@
     "@stomp/stompjs": "^7.0.0",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/sockjs-client": "^1.5.4",
-    "sockjs-client": "^1.6.1"
+    "sockjs-client": "^1.6.1",
+    "stylelint": "^16.13.2",
+    "stylelint-config-standard": "^37.0.0",
+    "stylelint-declaration-strict-value": "^1.10.7",
+    "stylelint-order": "^6.0.4"
   }
 }

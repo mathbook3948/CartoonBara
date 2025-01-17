@@ -1,0 +1,15 @@
+{
+  "extends": "stylelint-config-standard",
+  "plugins": [
+    "stylelint-order",
+    "stylelint-declaration-strict-value"
+  ],
+  "rules": {
+    "no-duplicate-selectors": true,
+    "no-duplicate-properties": true,
+    "declaration-block-no-duplicate-properties": true,
+    "declaration-block-no-redundant-longhand-properties": true,
+    "shorthand-property-no-redundant-values": true,
+    "order/properties-alphabetical-order": true
+  }
+}
